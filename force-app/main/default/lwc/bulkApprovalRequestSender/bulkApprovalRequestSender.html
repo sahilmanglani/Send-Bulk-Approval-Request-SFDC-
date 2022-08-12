@@ -1,0 +1,54 @@
+<template>
+    <lightning-card title="Bulk Approval Request">
+        <lightning-button-icon onclick={sendForApproval} title="Send for Approval" slot="actions"
+            icon-name="action:submit_for_approval" alternative-text="Add user" class="slds-m-left_xx-small">
+        </lightning-button-icon>
+        <div class="slds-p-around_small">
+            <lightning-datatable key-field="id" data={accounts} columns={columns}>
+            </lightning-datatable>
+        </div>
+
+    </lightning-card>
+
+
+    <!-- modal start -->
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={reset}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Submit for Approval</h2>
+                </header>
+
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                    <lightning-combobox name="progress" required="true" label="Users" placeholder="Select User"
+                    options={options}></lightning-combobox>
+
+                    
+                    <lightning-textarea name="input1" required="true" label="Comment" style="height: 15vh;"></lightning-textarea>
+
+
+                </div>
+
+                <!-- modal footer start-->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={reset}>Cancel</button>
+                    <button class="slds-button slds-button_neutral" onclick={processRecords}>Submit</button>
+                </footer>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- modal end -->
+
+</template>
